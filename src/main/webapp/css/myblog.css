@@ -1,0 +1,30 @@
+body {
+    font-family: "微软雅黑", "黑体", "文泉驿正黑";
+}
+
+nav {
+    background-image: url("../images/th.jpg");
+}
+
+.row1,.row2,.row3,.row4{
+    width: auto;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;/*超出范围隐藏*/
+}
+
+.row1{
+    -webkit-line-clamp: 1;/*显示的行数*/
+}
+
+.row2{
+    -webkit-line-clamp: 2;
+}
+
+.row3{
+    -webkit-line-clamp: 3;
+}
+
+.row4{
+    -webkit-line-clamp: 4;
+}

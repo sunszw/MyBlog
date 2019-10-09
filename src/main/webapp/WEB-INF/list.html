@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>博客首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="../bootstrap3/css/bootstrap.css"
+          th:href="@{bootstrap3/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" href="../bootstrap3/font-awesome-4.7.0/css/font-awesome.css"
+          th:href="@{bootstrap3/font-awesome-4.7.0/css/font-awesome.css}"/>
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" type="text/css" href="../css/layout3.css" th:href="@{css/layout3.css}"/>
+</head>
+
+<body>
+<!--网页最上方的留白-->
+<header>
+    <div class="container">
+				<span class="pull-right">
+					<small>Power by</small> <b>Smart</b>Blogs
+				</span>
+    </div>
+</header>
+<!--网页 导航栏 在layout.css 文件中设置在背景图片-->
+<nav>
+    <!-- class.container 容器定位 用于设置内容居中 -->
+    <div class="container">
+        <h1>
+            <b>popo酱的博客</b> <small>——po就是主子，我是po奴才</small>
+        </h1>
+        <!--导航栏-->
+        <div>
+            <!-- class="nav navbar-nav" 定义导航条 -->
+            <ul class="nav navbar-nav">
+                <li><a href="home">首页</a></li>
+                <li><a href="list">文章</a></li>
+            </ul>
+            <!-- class="nav navbar-nav" 定义导航条 向右侧浮动 -->
+            <ul class="nav navbar-nav navbar-right">
+                <!-- 导航条中的文字使用 class="navbar-text" 样式 -->
+                <li><span class="navbar-text">用户：admin</span></li>
+                <li><a href="login.html">登出</a></li>
+            </ul>
+        </div>
+        <!-- /导航栏 -->
+    </div>
+</nav>
+<section>
+    <div class="container">
+        <div class="row">
+            <!--左侧主要内容-->
+            <div class="col-md-9">
+                <h2 class="page-header">
+                    <span class="fa fa-list"></span> 文章列表
+                </h2>
+                <!--第一篇-->
+                <div class="panel panel-default" th:each="article : ${articles}">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="row-1">
+                                    <a th:href="@{detail(id=${article.oid})}" href="article2.html" th:text="${article.articleTitle}">给大家推荐几款不错的耳机</a>
+                                </h3>
+                                <p class="row-5" th:text="${article.articleAbstract}">
+                                    耳机其实是我们生活中经常使用的设备，如果你觉得太便宜的耳机质量差，太贵的又觉得没必要的话，那就可以看看我推荐给大家的这些了。 价格没有特别贵，希望能帮助你
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="../images/img24.jpg" class="img-rounded img-responsive" th:src=@{images/img{num}.jpg(num=${article.articleRandomDouble%30})}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="fa fa-calendar" th:text=${article.createdTime}>2000-10-10 10:10</span>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-eye" th:text="${article.articleViewCount}">0</span>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-comment-o" th:text="${article.articleCommentCount}">0</span>
+                            </div>
+                            <div class="col-md-3" th:each="tag : ${article.tags}">
+                                <a class="btn btn-info btn-xs" href="list.html" th:text="${tag.tagTitle}">歌曲</a>
+                                <a class="btn btn-info btn-xs" href="list.html" th:remove="all">手机</a>
+                                <a class="btn btn-info btn-xs" href="list.html" th:remove="all">耳机</a>
+                            </div>
+                            <div class="col-md-2">
+								<p>作者: <span th:text="${article.user.username}">admin</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--第二篇-->
+                <div class="panel panel-default" th:remove="all">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="row-1">
+                                    <a href="article3.html">《炉石传说》卡牌游戏系统介绍</a>
+                                </h3>
+                                <p class="row-5">
+                                    2014年3月13日全球同步正式运营。2014年获TGA2014游戏大奖最佳移动掌机游戏， 2015年获第二届SXSW游戏大奖年度移动游戏。
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="../images/img28.jpg" class="img-rounded img-responsive"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="fa fa-calendar"></span> 2018-10-19 11:39
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-eye"></span> 1
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-comment-o"></span> 0
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn btn-info btn-xs" href="list.html">手机</a>
+                                <a class="btn btn-info btn-xs" href="list.html">游戏</a>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="pull-right">作者：admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--第三篇-->
+                <div class="panel panel-default" th:remove="all">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="row-1">
+                                    <a href="article2.html">java好学不好学</a>
+                                </h3>
+                                <p class="row-5">
+                                    如果你有计算机基础知识，有面向对象的概念，那么我只能说真的好学，而且各种资料漫天飞舞~ 如果你以前就不知道编程是个啥，那我建议你还是看点基础入门的吧，比如C.....
+                                    数据结构、算法啥的，用到在学也不晚，但是你得稍微知道点
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="../images/img6.jpg" class="img-rounded img-responsive"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="fa fa-calendar"></span> 2018-10-17 14:40
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-eye"></span> 21
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-comment-o"></span> 0
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn btn-info btn-xs" href="list.html">Java</a>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="pull-right">作者：admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--第四篇-->
+                <div class="panel panel-default" th:remove="all">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="row-1">
+                                    <a href="article2.html">王者荣耀好玩么</a>
+                                </h3>
+                                <p class="row-5">
+                                    《王者荣耀》是由腾讯游戏天美工作室群开发并运行的一款运营在Android、IOS、NS平台上的MOBA类手机游戏，于2015年11月26日在Android、IOS平台上正式公测，游戏前期使用名称有《英雄战迹》、《王者联盟》。《Arena
+                                    Of Valor》，即《王者荣耀》的欧美版本于2018年在任天堂Switch平台发售。
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="../images/img27.jpg" class="img-rounded img-responsive"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="fa fa-calendar"></span> 2018-11-23 11:19
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-eye"></span> 0
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-comment-o"></span> 0
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn btn-info btn-xs" href="list.html">游戏</a>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="pull-right">作者：admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--第五篇-->
+                <div class="panel panel-default" th:remove="all">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="row-1">
+                                    <a href="article2.html">百岁山为什么那么贵</a>
+                                </h3>
+                                <p class="row-5">
+                                    景田公司成立于1992年，是一家专注于瓶装、桶装饮用水生产和销售的大型企业。公司分别在广东深圳、广东惠州百岁山、北京、福建及成都建有大型生产基地，拥有世界一流的生产厂房，二十八条世界最先进的全自动生产线，雄厚的技术力量和经济实力一直在饮用水行业中得到公认。
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="../images/img11.jpg" class="img-rounded img-responsive"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="fa fa-calendar"></span> 2018-10-27 15:50
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-eye"></span> 3
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-comment-o"></span> 0
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn btn-info btn-xs" href="list.html?tid=25">心情</a>
+                                <a class="btn btn-info btn-xs" href="list.html?tid=12">八卦</a>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="pull-right">作者：admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--第六篇-->
+                <div class="panel panel-default" th:remove="all">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="row-1">
+                                    <a href="article2.html">《我不是药神》观后的反思</a>
+                                </h3>
+                                <p class="row-5">
+                                    《我不是药神》是由文牧野执导，宁浩、徐峥共同监制的剧情片，徐峥、周一围、王传君、谭卓、章宇、杨新鸣等主演
+                                    。该片于2018年7月5日在中国上映。影片讲述了神油店老板程勇从一个交不起房租的男性保健品商贩，一跃成为印度仿制药“格列宁”独家代理商的故事。
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="../images/img1.jpg" class="img-rounded img-responsive"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="fa fa-calendar"></span> 2018-10-11 15:41
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-eye"></span> 26
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-comment-o"></span> 3
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn btn-info btn-xs" href="list.html?tid=49">演员</a>
+                                <a class="btn btn-info btn-xs" href="list.html?tid=55">电影</a>
+                                <a class="btn btn-info btn-xs" href="list.html?tid=12">八卦</a>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="pull-right">作者：admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--第七篇-->
+                <div class="panel panel-default" th:remove="all">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="row-1">
+                                    <a href="article2.html">王思聪吃热狗表情包是怎么来的</a>
+                                </h3>
+                                <p class="row-5">
+                                    王思聪吃热狗的表情包是在十一月三日，ig夺冠的现场被偷拍的，然后又有一些有才的网友进行再次创作的得到的，不得不说这一届的网友实力很强啊
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="../images/img7.jpg" class="img-rounded img-responsive"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="fa fa-calendar"></span> 2018-10-17 14:47
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-eye"></span> 20
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-comment-o"></span> 3
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn btn-info btn-xs" href="list.html?tid=49">演员</a>
+                                <a class="btn btn-info btn-xs" href="list.html?tid=12">八卦</a>
+                                <a class="btn btn-info btn-xs" href="list.html?tid=28">游戏</a>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="pull-right">作者：admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--第八篇-->
+                <div class="panel panel-default" th:remove="all">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="row-1">
+                                    <a href="article2.html">荒野大镖客：救赎2</a>
+                                </h3>
+                                <p class="row-5">
+                                    《荒野大镖客：救赎2》（Red Dead: RedemptionⅡ）是Rockstar San
+                                    Diego工作室制作，Rockstar公司发行的一款以美国西部拓荒史为题材的动作冒险游戏，为2010年该公司发行的《荒野大镖客：救赎》的正统续作。
+                                    2018年10月26日，游戏开始发售 。11月底，游戏将推出线上模式
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="../images/img8.jpg" class="img-rounded img-responsive"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="fa fa-calendar"></span> 2018-11-08 11:05
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-eye"></span> 9
+                            </div>
+                            <div class="col-md-2">
+                                <span class="fa fa-comment-o"></span> 0
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn btn-info btn-xs" href="list.html">游戏</a>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="pull-right">作者：admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--分页链接-->
+                <div>
+                    <span><a href="list.html" class="btn btn-default">上一页</a></span>
+                    <span><a href="list.html" class="btn btn-default">下一页</a></span>
+                    <span>当前1页，共4页，每页8条</span>
+                </div>
+            </div>
+            <!--左侧内容结束-->
+            <!--右侧内容开始-->
+            <div class="col-md-3">
+
+                <h2 class="page-header">
+                    <span class="fa fa-thumbs-o-up"></span> 推荐阅读
+                </h2>
+                <!--搜索-->
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-heading">
+                        <h3><span class="fa fa-search"></span> 文章搜索</h3></li>
+                    <li class="list-group-item">
+                        <form class="form-inline" action="search" method="get">
+                            <!-- form-group 定义一项输入数据，必须包含label标签和input标签 -->
+                            <div class="form-group">
+                                <!-- 通过为 label 设置 .sr-only 类将其隐藏 -->
+                                <label class="sr-only" for="title">请输入文章标题</label>
+                                <!-- form-control 声明表单输入控件，用在input元素上 -->
+                                <input name="keyWord" type="text" class="form-control" id="title" placeholder="请输入文章标题">
+                            </div>
+                            <button type="submit" class="btn btn-default">
+                                <span class="fa fa-search"></span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+                <!--最新-->
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-heading">
+                        <h3><span class="fa fa-calendar"></span> 最新内容</h3></li>
+                    <li class="list-group-item">
+                        <a href="article3.html" class="row-1">《炉石传说》卡牌游戏系统介绍</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article.html" class="row-1">《我不是药神》观后的反思</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article2.html" class="row-1">给大家推荐几款不错的耳机</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article.html" class="row-1">王者荣耀好玩么</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article2.html" class="row-1">java好学不好学</a>
+                    </li>
+                </ul>
+                <!--评论-->
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-heading">
+                        <h3><span class="fa fa-comment-o"></span> 评论最热</h3></li>
+                    <li class="list-group-item">
+                        <a href="article3.html" class="row-1">我要支持markDown</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article.html" class="row-1">《我不是药神》观后的反思</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article2.html" class="row-1">荒野大镖客：救赎2</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article3.html" class="row-1">人民空军，生日快乐！</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article.html" class="row-1">mate20 pro真不错了</a>
+                    </li>
+                </ul>
+                <!--浏览-->
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-heading">
+                        <h3><span class="fa fa-eye"></span> 浏览最多</h3></li>
+                    <li class="list-group-item">
+                        <a href="article2.html" class="row-1">mate20 pro真不错了</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article3.html" class="row-1">荒野大镖客：救赎2</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article.html" class="row-1">人民空军，生日快乐！</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article2.html" class="row-1"> 双11"车祸现场"</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="article3.html" class="row-1">习近平将出席APEC第二十六次领导人非正式会议</a>
+                    </li>
+                </ul>
+                <!--分类-->
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-heading">
+                        <h3><span class="fa fa-tag"></span> 分类标签</h3></li>
+                    <li class="list-group-item"><a class="row-1" href="list.html?tid=12">八卦(6)</a></li>
+                    <li class="list-group-item"><a class="row-1" href="list.html?tid=49">演员(5)</a></li>
+                    <li class="list-group-item"><a class="row-1" href="list.html?tid=28">游戏(4)</a></li>
+                    <li class="list-group-item"><a class="row-1" href="list.html?tid=25">心情(3)</a></li>
+                    <li class="list-group-item"><a class="row-1" href="list.html?tid=53">新闻(5)</a></li>
+                </ul>
+                <!--链接-->
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-heading">
+                        <h3><span class="fa fa-link"></span> 友情链接</h3></li>
+                    <li class="list-group-item"><a target="_blank" href="http://www.163.com">网易</a></li>
+                    <li class="list-group-item"><a target="_blank" href="http://www.tedu.cn">达内</a></li>
+                    <li class="list-group-item"><a target="_blank" href="http://www.baidu.com">百度</a></li>
+                    <li class="list-group-item"><a target="_blank" href="http://cn.bing.com/">必应</a></li>
+                    <li class="list-group-item"><a target="_blank" href="http://www.qq.com">腾讯</a></li>
+                    <li class="list-group-item"><a target="_blank" href="http://www.jd.com">京东</a></li>
+                    <li class="list-group-item"><a target="_blank" href="http://www.taobao.com">淘宝</a></li>
+                    <li class="list-group-item"><a target="_blank" href="http://www.tmall.com">天猫</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--网页底部， class.well 用于设置背景效果-->
+<footer class="well">
+    <!-- class.container 的作用是进行居中布局 -->
+    <div class="container">
+        <b>Copyright © 2018 Tedu.cn All Rights Reserved
+            京ICP备08000853号-56 <a href="http://www.tedu.cn/">达内时代科技集团有限公司</a>
+            版权所有
+        </b> <span class="pull-right"> <b>Version</b> 0.1.0
+      </span>
+    </div>
+</footer>
+
+</body>
+<script type="text/javascript" src="../bootstrap3/jquery.min.js" th:src="@{bootstrap3/jquery.min.js}"></script>
+<script type="text/javascript" src="../bootstrap3/js/bootstrap.js" th:src="@{bootstrap3/js/bootstrap.js}"></script>
+<script type="text/javascript" src="../bootstrap3/js/holder.js" th:src="@{bootstrap3/js/holder.js}"></script>
+<script type="text/javascript" src="../bootstrap3/js/html5shiv.min.js"
+        th:src="@{bootstrap3/js/html5shiv.min.js}"></script>
+<script type="text/javascript" src="../bootstrap3/js/css3-mediaqueries.js"
+        th:src="@{bootstrap3/js/css3-mediaqueries.js}"></script>
+<script type="text/javascript" src="../bootstrap3/js/respond.min.js" th:src="@{bootstrap3/js/respond.min.js}"></script>
+
+</html>
